@@ -33,6 +33,45 @@ function App() {
     setSelectedDate(amendedDate.substring(0, 10));
   }
 
+  //Remove for removing todos
+  function removeTodoHandler(todoContent) {
+    //Create copy of current state array without the todo to be removed
+    const newArray = todos.filter(
+      (todo) => todo.content !== todoContent || todo.date !== selectedDate
+    );
+
+    //Set todo list to new array with removed todo
+    onChangeTodos(newArray);
+  }
+
+  //Handles todo edits
+  function handleTodoEdit(originalTodoContent, newTodoContent) {
+    let originalTodoObject = {};
+
+    //Create copy of current state array without the todo being edited
+    todos.forEach((todo) => {
+      if (todo.content === originalTodoContent) {
+        originalTodoObject = todo;
+      }
+    });
+
+    let editedTodoObject = {
+      id: Math.random(),
+      date: originalTodoObject.date,
+      content: newTodoContent,
+    };
+
+    //Create copy of current state array without the todo to be edited
+    const newArray = todos.filter(
+      (todo) =>
+        todo.content !== originalTodoContent || todo.date !== selectedDate
+    );
+
+    onChangeTodos([editedTodoObject, ...newArray]);
+
+    console.log(newArray);
+  }
+
   return (
     <div>
       {/*Renders the calendar*/}
@@ -42,6 +81,8 @@ function App() {
         selectedDate={selectedDate}
         todoList={todos}
         createTodo={addTodoHandler}
+        removeTodo={removeTodoHandler}
+        getEditedTodo={handleTodoEdit}
       />
     </div>
   );

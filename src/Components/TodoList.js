@@ -13,6 +13,15 @@ function TodoList(props) {
     }
   }
 
+  function getTodoKey(key) {
+    props.removeTodo(key);
+  }
+
+  //Pass original todo and edited todo up app.js
+  function handleTodoEdit(originalTodoContent, newTodoContent) {
+    props.getEditedTodo(originalTodoContent, newTodoContent);
+  }
+
   //If no todos for particular day, render 'Found no todos'
   if (todos.length === 0) {
     return (
@@ -37,7 +46,12 @@ function TodoList(props) {
       />
       {/*Create a new todo component for each todo in 'todos' array*/}
       {todos.map((todo) => (
-        <Todo key={Math.random()} content={todo} />
+        <Todo
+          key={Math.random()}
+          content={todo}
+          getKey={getTodoKey}
+          getEditedTodo={handleTodoEdit}
+        />
       ))}
     </div>
   );
