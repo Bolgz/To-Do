@@ -18,14 +18,7 @@ function DateSelector(props) {
 
   //Prints the scheduled events for that day, if any
   function onSelectDay(date) {
-    let todos = [];
-
-    for (let index = 0; index < props.todoList.length; index++) {
-      if (props.todoList[index].date === date.toLocaleDateString()) {
-        todos.push(props.todoList[index].content);
-      }
-    }
-    props.onSelectDate(date, todos);
+    props.onSelectDate(date);
   }
 
   /**This hook allows onSelectDay to be called when the page is first rendered

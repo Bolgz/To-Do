@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import "./CreateModal.css";
 
 function CreateModal(props) {
+  //Is modal currently open
   const [modal, setModal] = useState(false);
+  //State for todo title and date
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
@@ -24,6 +26,7 @@ function CreateModal(props) {
     event.preventDefault();
     const dateObj = new Date(enteredDate).toLocaleString();
 
+    //New todo object
     const newTodo = {
       id: Math.random(),
       date: dateObj.substring(0, 10),
@@ -34,6 +37,7 @@ function CreateModal(props) {
     setEnteredDate("");
     setEnteredTitle("");
 
+    //Passes new todo up to 'todolist.js' which is passed up to 'app.js'
     props.createTodo(newTodo);
   }
 
@@ -45,8 +49,10 @@ function CreateModal(props) {
 
   return (
     <div>
+      {/* + Icon*/}
       <FaPlusSquare className="create_icon" onClick={toggleModal} />
 
+      {/*If modal is true return everything after &&*/}
       {modal && (
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>

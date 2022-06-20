@@ -3,7 +3,18 @@ import "./TodoList.css";
 import CreateModal from "./Modals/CreateModal";
 
 function TodoList(props) {
-  if (props.filteredTodos.length === 0) {
+  //Stores the filtered todos for the currently selected date
+  let todos = [];
+
+  //Filters todos and adds them to 'todos' array
+  for (let index = 0; index < props.todoList.length; index++) {
+    if (props.todoList[index].date === props.selectedDate) {
+      todos.push(props.todoList[index].content);
+    }
+  }
+
+  //If no todos for particular day, render 'Found no todos'
+  if (todos.length === 0) {
     return (
       <div className="todo_list">
         <h3 className="todo_date">{props.selectedDate}</h3>
@@ -16,8 +27,10 @@ function TodoList(props) {
   return (
     <div className="todo_list">
       <h3 className="todo_date">{props.selectedDate}</h3>
+      {/*Modal (pop up) for creating new todos*/}
       <CreateModal createTodo={props.createTodo} />
-      {props.filteredTodos.map((todo) => (
+      {/*Create a new todo component for each todo in 'todos' array*/}
+      {todos.map((todo) => (
         <Todo key={Math.random()} content={todo} />
       ))}
     </div>
