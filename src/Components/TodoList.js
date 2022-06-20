@@ -18,7 +18,10 @@ function TodoList(props) {
     return (
       <div className="todo_list">
         <h3 className="todo_date">{props.selectedDate}</h3>
-        <CreateModal createTodo={props.createTodo} />
+        <CreateModal
+          createTodo={props.createTodo}
+          selectedDate={props.selectedDate}
+        />
         <h4 className="no_todos">Found no todos</h4>
       </div>
     );
@@ -28,7 +31,10 @@ function TodoList(props) {
     <div className="todo_list">
       <h3 className="todo_date">{props.selectedDate}</h3>
       {/*Modal (pop up) for creating new todos*/}
-      <CreateModal createTodo={props.createTodo} />
+      <CreateModal
+        createTodo={props.createTodo}
+        selectedDate={props.selectedDate}
+      />
       {/*Create a new todo component for each todo in 'todos' array*/}
       {todos.map((todo) => (
         <Todo key={Math.random()} content={todo} />

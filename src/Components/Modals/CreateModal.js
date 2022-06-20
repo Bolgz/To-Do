@@ -5,16 +5,11 @@ import "./CreateModal.css";
 function CreateModal(props) {
   //Is modal currently open
   const [modal, setModal] = useState(false);
-  //State for todo title and date
+  //State for todo title
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
 
   function titleChangeHandler(event) {
     setEnteredTitle(event.target.value);
-  }
-
-  function dateChangeHandler(event) {
-    setEnteredDate(event.target.value);
   }
 
   const toggleModal = () => {
@@ -24,17 +19,15 @@ function CreateModal(props) {
   function submitHandler(event) {
     //Stops the form from sending a request to URL. Can handle form submission with JS
     event.preventDefault();
-    const dateObj = new Date(enteredDate).toLocaleString();
 
     //New todo object
     const newTodo = {
       id: Math.random(),
-      date: dateObj.substring(0, 10),
+      date: props.selectedDate,
       content: enteredTitle,
     };
 
     //Resets inputs - a two-way binding has been set up
-    setEnteredDate("");
     setEnteredTitle("");
 
     //Passes new todo up to 'todolist.js' which is passed up to 'app.js'
@@ -64,12 +57,6 @@ function CreateModal(props) {
                 type="text"
                 onChange={titleChangeHandler}
                 value={enteredTitle}
-              />
-              <label>Date:</label>
-              <input
-                type="date"
-                onChange={dateChangeHandler}
-                value={enteredDate}
               />
               <button type="submit">Add Todo</button>
             </form>
