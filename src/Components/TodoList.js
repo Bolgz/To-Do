@@ -44,15 +44,17 @@ function TodoList(props) {
         createTodo={props.createTodo}
         selectedDate={props.selectedDate}
       />
-      {/*Create a new todo component for each todo in 'todos' array*/}
-      {todos.map((todo) => (
-        <Todo
-          key={Math.random()}
-          content={todo}
-          getKey={getTodoKey}
-          getEditedTodo={handleTodoEdit}
-        />
-      ))}
+      <div className="todo_container">
+        {/*Create a new todo component for each todo in 'todos' array*/}
+        {todos.map((todo) => (
+          <Todo
+            key={Math.random()}
+            content={todo}
+            getKey={getTodoKey}
+            getEditedTodo={handleTodoEdit}
+          />
+        ))}
+      </div>
     </div>
   );
 }

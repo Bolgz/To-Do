@@ -4,30 +4,25 @@
   border-radius: 12px;
   box-shadow: 0 1px 7px;
   margin: auto;
-  margin-top: 100px;
-  width: 400px;
+  margin-top: 50px;
+  width: 345px;
   background-color: rgb(255, 255, 255);
   padding: 15px;
 }
 
 .todo_date {
   display: inline;
-  margin-left: 150px;
-}
-
-.create_icon {
-  height: 30px;
-  width: 30px;
-  margin-bottom: -4px;
-  float: right;
-  margin-right: 25px;
-  color: green;
+  margin-left: 4px;
 }
 
 .no_todos {
   margin: auto;
   margin-top: 50px;
-  margin-left: 128px;
-  margin-bottom: 60px;
+  margin-left: 100px;
+  margin-bottom: 30px;
   font-size: 20px;
+}
+
+.todo_container {
+  margin-top: 30px;
 }

@@ -9,7 +9,7 @@ function App() {
   const [todos, onChangeTodos] = useState([
     { id: 1, date: "19/06/2022", content: "Go shopping" },
     { id: 2, date: "20/06/2022", content: "Go skiing" },
-    { id: 3, date: "20/06/2022", content: "Go somewhere" },
+    { id: 3, date: "21/06/2022", content: "Go somewhere" },
     { id: 4, date: "23/06/2022", content: "Go cycling" },
     { id: 5, date: "25/06/2022", content: "Go boxing" },
     { id: 6, date: "29/06/2022", content: "Go gym" },

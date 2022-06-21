@@ -1,5 +1,6 @@
-import { FaPencilAlt } from "react-icons/fa";
 import React, { useState } from "react";
+import UseAnimations from "react-useanimations";
+import settings from "react-useanimations/lib/settings";
 
 function EditModal(props) {
   //Is modal currently open
@@ -33,8 +34,14 @@ function EditModal(props) {
 
   return (
     <div>
-      {/*Pencil Icon*/}
-      <FaPencilAlt className="pencil_icon" onClick={toggleModal} />
+      {/*Settings cog Icon*/}
+      <UseAnimations
+        animation={settings}
+        size={28}
+        className="pencil_icon"
+        onClick={toggleModal}
+        speed={1.5}
+      />
 
       {/*If modal is true return everything after &&*/}
       {modal && (

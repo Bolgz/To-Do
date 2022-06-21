@@ -1,6 +1,7 @@
-import { FaPlusSquare } from "react-icons/fa";
 import React, { useState } from "react";
 import "./CreateModal.css";
+import UseAnimations from "react-useanimations";
+import plusToX from "react-useanimations/lib/plusToX";
 
 function CreateModal(props) {
   //Is modal currently open
@@ -13,6 +14,7 @@ function CreateModal(props) {
   }
 
   const toggleModal = () => {
+    setEnteredTitle("");
     setModal(!modal);
   };
 
@@ -43,7 +45,13 @@ function CreateModal(props) {
   return (
     <div>
       {/* + Icon*/}
-      <FaPlusSquare className="create_icon" onClick={toggleModal} />
+      <UseAnimations
+        animation={plusToX}
+        size={28}
+        speed={0}
+        className="pulse"
+        onClick={toggleModal}
+      />
 
       {/*If modal is true return everything after &&*/}
       {modal && (
