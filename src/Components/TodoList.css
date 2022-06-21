@@ -13,6 +13,8 @@
 .todo_date {
   display: inline;
   margin-left: 4px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .no_todos {
@@ -21,6 +23,8 @@
   margin-left: 100px;
   margin-bottom: 30px;
   font-size: 20px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .todo_container {

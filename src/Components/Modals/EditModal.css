@@ -36,6 +36,11 @@ body.active-modal {
   min-width: 300px;
 }
 
+.modal-content * {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
 .close-modal {
   position: absolute;
   top: 10px;

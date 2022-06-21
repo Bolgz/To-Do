@@ -60,17 +60,25 @@ function CreateModal(props) {
           <div className="modal-content">
             <h2>Create Todo</h2>
             <form onSubmit={submitHandler}>
-              <label>Todo:</label>
               <input
                 type="text"
                 onChange={titleChangeHandler}
                 value={enteredTitle}
+                className="todo_input"
               />
-              <button type="submit">Add Todo</button>
+              <button type="submit" className="submit_button">
+                Add Todo
+              </button>
             </form>
-            <button className="close-modal" onClick={toggleModal}>
-              CLOSE
-            </button>
+
+            {/* Close modal icon*/}
+            <UseAnimations
+              animation={plusToX}
+              size={28}
+              speed={0}
+              className="close-modal"
+              onClick={toggleModal}
+            />
           </div>
         </div>
       )}
