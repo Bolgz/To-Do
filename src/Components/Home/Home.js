@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
-import DateSelector from "./DateSelector/DateSelector";
-import TodoList from "./Todos/TodoList";
+import DateSelector from "../DateSelector/DateSelector";
+import TodoList from "../Todos/TodoList";
+import "./Home.css";
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
+import UseAnimations from "react-useanimations";
+import github from "react-useanimations/lib/github";
 
 function Home(props) {
   //Test data, maybe use Firebase to store todos?
@@ -86,7 +91,16 @@ function Home(props) {
 
   return (
     <div>
-      <button onClick={signUserOut}>Signout</button>
+      <div className="header">
+        <h1 className="title">Todo App!</h1>
+      </div>
+      <AwesomeButton
+        type="primary"
+        onPress={signUserOut}
+        className="signout-button"
+      >
+        Sign Out
+      </AwesomeButton>
       {/*Renders the calendar*/}
       <DateSelector todoList={todos} onSelectDate={setDate} />
       {/*Renders the todo list for the currently selected date*/}
@@ -97,6 +111,21 @@ function Home(props) {
         removeTodo={removeTodoHandler}
         getEditedTodo={handleTodoEdit}
       />
+
+      <div className="footer">
+        <a href="https://github.com/Bolgz">
+          <p className="copyrighttext">Marco Freemantle</p>
+          <UseAnimations
+            animation={github}
+            size={40}
+            className="github_icon"
+            fillColor="White"
+            strokeColor="White"
+            autoplay={true}
+            loop={true}
+          />
+        </a>
+      </div>
     </div>
   );
 }

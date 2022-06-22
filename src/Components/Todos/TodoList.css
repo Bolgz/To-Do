@@ -4,10 +4,11 @@
   border-radius: 12px;
   box-shadow: 0 1px 7px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 15px;
   width: 345px;
   background-color: rgb(255, 255, 255);
   padding: 15px;
+  min-height: 310px;
 }
 
 .todo_date {
@@ -15,11 +16,12 @@
   margin-left: 4px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  text-decoration: underline;
 }
 
 .no_todos {
   margin: auto;
-  margin-top: 50px;
+  margin-top: 125px;
   margin-left: 100px;
   margin-bottom: 30px;
   font-size: 20px;

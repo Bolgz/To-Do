@@ -12,20 +12,13 @@ function Singup(props) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        //Switches to home screen upon account creation
+        props.handleLogin();
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
       });
-  }
-
-  //Checks if current user is logged in
-  function isLoggedIn() {
-    const auth = getAuth();
-    return auth.currentUser !== null;
   }
 
   return (

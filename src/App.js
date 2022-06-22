@@ -1,8 +1,8 @@
 import "./App.css";
-import Home from "./Components/Home";
+import Home from "./Components/Home/Home";
 import Login from "./Components/Login-Signup/Login";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
 
 //Firebase configuration
@@ -23,10 +23,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Checks if current user is logged in
-  function getIsLoggedIn() {
+  async function getIsLoggedIn() {
     const auth = getAuth();
-    console.log(auth.currentUser);
-    return auth.currentUser !== null;
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        //User is logged in
+        console.log(auth.currentUser);
+        setIsLoggedIn(true);
+      } else {
+        //User is not logged in
+        console.log(auth.currentUser);
+        setIsLoggedIn(false);
+      }
+    });
   }
 
   //Sets authentication status for current user
@@ -34,7 +43,9 @@ function App() {
     setIsLoggedIn(getIsLoggedIn());
   }
 
-  if (getIsLoggedIn()) {
+  getIsLoggedIn();
+
+  if (isLoggedIn) {
     return <Home handleLogout={setAuthentication} />;
   } else {
     return <Login handleLogin={setAuthentication} />;

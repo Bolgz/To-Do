@@ -1,6 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Signup from "./Signup";
 
 function Login(props) {
@@ -10,6 +15,8 @@ function Login(props) {
 
   //State for if user wants to login or signup
   const [isLogin, setIsLogin] = useState(true);
+
+  let currentUser = null;
 
   //Handles user login
   function loginUser() {
@@ -22,21 +29,42 @@ function Login(props) {
         props.handleLogin();
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
       });
   }
 
-  //Checks if current user is logged in
-  function isLoggedIn() {
+  function setAuthPersistence() {
     const auth = getAuth();
-    return auth.currentUser !== null;
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with local persistence.
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            props.handleLogin();
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 
+  //Switches between login and signup pages
   function toggleLoginSignup() {
     setIsLogin(!isLogin);
-    console.log("called");
   }
 
   if (isLogin) {
@@ -59,12 +87,14 @@ function Login(props) {
           required
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button onClick={loginUser}>Login Up</button>
+        <button onClick={setAuthPersistence}>Login Up</button>
         <button onClick={toggleLoginSignup}>Sign Up</button>
       </div>
     );
   } else {
-    return <Signup goToLogin={toggleLoginSignup} />;
+    return (
+      <Signup goToLogin={toggleLoginSignup} handleLogin={props.handleLogin} />
+    );
   }
 }
 
