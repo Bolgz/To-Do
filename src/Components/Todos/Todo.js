@@ -1,5 +1,5 @@
 import "./Todo.css";
-import EditModal from "./Modals/EditModal";
+import EditModal from "../Modals/EditModal";
 import UseAnimations from "react-useanimations";
 import trash2 from "react-useanimations/lib/trash2";
 

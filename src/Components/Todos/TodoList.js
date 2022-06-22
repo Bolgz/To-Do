@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 import "./TodoList.css";
-import CreateModal from "./Modals/CreateModal";
+import CreateModal from "../Modals/CreateModal";
 
 function TodoList(props) {
   //Stores the filtered todos for the currently selected date
