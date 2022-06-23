@@ -2,7 +2,6 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   setPersistence,
-  browserSessionPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
 import React, { useState } from "react";
@@ -16,24 +15,7 @@ function Login(props) {
   //State for if user wants to login or signup
   const [isLogin, setIsLogin] = useState(true);
 
-  let currentUser = null;
-
-  //Handles user login
-  function loginUser() {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        props.handleLogin();
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
-  }
-
+  //Logs in users and sets their authentication persistence
   function setAuthPersistence() {
     const auth = getAuth();
     setPersistence(auth, browserLocalPersistence)
@@ -57,8 +39,8 @@ function Login(props) {
       })
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
       });
   }
 

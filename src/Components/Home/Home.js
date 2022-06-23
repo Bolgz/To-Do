@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import DateSelector from "../DateSelector/DateSelector";
 import TodoList from "../Todos/TodoList";
@@ -7,28 +7,35 @@ import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import UseAnimations from "react-useanimations";
 import github from "react-useanimations/lib/github";
+import * as utilities from "../Utilities/FireStoreUtilities";
+import { getUA } from "@firebase/util";
 
 function Home(props) {
   //Test data, maybe use Firebase to store todos?
-  const [todos, onChangeTodos] = useState([
-    { id: 1, date: "19/06/2022", content: "Go shopping" },
-    { id: 2, date: "20/06/2022", content: "Go skiing" },
-    { id: 3, date: "21/06/2022", content: "Go somewhere" },
-    { id: 4, date: "23/06/2022", content: "Go cycling" },
-    { id: 5, date: "25/06/2022", content: "Go boxing" },
-    { id: 6, date: "29/06/2022", content: "Go gym" },
-    { id: 7, date: "29/06/2022", content: "Go asda" },
-  ]);
+  const [todos, setTodosState] = useState([]);
 
   //Currently selected date
   const [selectedDate, setSelectedDate] = useState("");
 
-  //Adds a todo to the todo object list
-  function addTodoHandler(todo) {
-    onChangeTodos((prevTodos) => {
-      return [todo, ...prevTodos];
-    });
-  }
+  /**This hook allows utilities.getTodos() to be called when the page is first rendered
+   *  but not when state changes */
+  useEffect(() => {
+    let ignore = false;
+
+    if (!ignore) {
+      const auth = getAuth();
+      utilities.getTodos(auth.currentUser.uid).then((todoList) => {
+        console.log(todoList);
+        setTodosState(todoList);
+        return;
+      });
+    }
+    return () => {
+      ignore = true;
+    };
+    //This comment removes warnings for some reason???
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //Sets the currently selected date
   function setDate(date) {
@@ -37,15 +44,27 @@ function Home(props) {
     setSelectedDate(amendedDate.substring(0, 10));
   }
 
-  //Remove for removing todos
+  //Adds a todo to the todo object list
+  function addTodoHandler(todo) {
+    setTodosState((prevTodos) => {
+      //Add todo to firestore database
+      utilities.setTodos(getAuth().currentUser.uid, [todo, ...prevTodos]);
+      return [todo, ...prevTodos];
+    });
+  }
+
+  //Function for removing todos
   function removeTodoHandler(todoContent) {
     //Create copy of current state array without the todo to be removed
     const newArray = todos.filter(
       (todo) => todo.content !== todoContent || todo.date !== selectedDate
     );
 
+    //Remove todo to firestore database
+    utilities.setTodos(getAuth().currentUser.uid, newArray);
+
     //Set todo list to new array with removed todo
-    onChangeTodos(newArray);
+    setTodosState(newArray);
   }
 
   //Handles todo edits
@@ -71,7 +90,7 @@ function Home(props) {
         todo.content !== originalTodoContent || todo.date !== selectedDate
     );
 
-    onChangeTodos([editedTodoObject, ...newArray]);
+    setTodosState([editedTodoObject, ...newArray]);
 
     console.log(newArray);
   }

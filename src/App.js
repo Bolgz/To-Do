@@ -2,7 +2,8 @@ import "./App.css";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login-Signup/Login";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import * as utilities from "./Components/Utilities/FireStoreUtilities";
 import React, { useState } from "react";
 
 //Firebase configuration
@@ -26,10 +27,21 @@ function App() {
   async function getIsLoggedIn() {
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
+      //User is logged in
       if (user) {
-        //User is logged in
-        console.log(auth.currentUser);
+        //Shows home page if user is logged in
         setIsLoggedIn(true);
+        //Checks if user is in Firestore database
+        utilities.getUser(user.uid).then((userExists) => {
+          //If user is not in database
+          if (!userExists) {
+            //Adds user to Firestore database
+            utilities.addUser(user.uid);
+          } else {
+            //User is in database so do nothing
+            return;
+          }
+        });
       } else {
         //User is not logged in
         console.log(auth.currentUser);
