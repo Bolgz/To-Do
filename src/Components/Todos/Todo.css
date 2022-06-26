@@ -8,6 +8,8 @@
   max-width: 370px;
   background-color: rgb(255, 255, 255);
   padding: 6px;
+  margin-left: 5px;
+  margin-right: 7px;
 }
 
 .todo p {
@@ -18,7 +20,7 @@
 
 .trash_icon {
   height: 20px;
-  margin-top: -27px;
+  margin-top: -26px;
   float: right;
   margin-right: 10px;
 }
@@ -27,5 +29,5 @@
   height: 20px;
   margin-top: -24px;
   float: left;
-  margin-left: 255px;
+  margin-left: 233px;
 }

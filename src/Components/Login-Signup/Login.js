@@ -80,12 +80,14 @@ function Login(props) {
           <button onClick={setAuthPersistence} className="login_button">
             Log in
           </button>
-          <button onClick={toggleLoginSignup} className="signup_button">
-            Click here to Sign Up!
-          </button>
+          <div style={{ textAlign: "center" }}>
+            <button onClick={toggleLoginSignup} className="signup_button">
+              Click here to Sign Up!
+            </button>
+          </div>
         </div>
 
-        <div className="footer">
+        <div className="footer-login">
           <a href="https://github.com/Bolgz">
             <p className="copyrighttext">Marco Freemantle</p>
             <UseAnimations

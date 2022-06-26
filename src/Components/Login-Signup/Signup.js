@@ -51,12 +51,14 @@ function Singup(props) {
         <button onClick={createUserAccount} className="signup">
           Sign up!
         </button>
-        <button onClick={props.goToLogin} className="login">
-          Click here to Log in!
-        </button>
+        <div style={{ textAlign: "center" }}>
+          <button onClick={props.goToLogin} className="login">
+            Click here to Log in!
+          </button>
+        </div>
       </div>
 
-      <div className="footer">
+      <div className="footer-signup">
         <a href="https://github.com/Bolgz">
           <p className="copyrighttext">Marco Freemantle</p>
           <UseAnimations
