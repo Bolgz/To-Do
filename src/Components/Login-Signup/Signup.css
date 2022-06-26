@@ -66,7 +66,7 @@
   margin-top: 100pxpx;
 }
 
-.login_button {
+.signup {
   background-color: #c886e6;
   border: none;
   color: white;
@@ -81,7 +81,7 @@
   cursor: pointer;
 }
 
-.signup_button {
+.login {
   background-color: rgb(200, 228, 223);
   border: none;
   color: rgb(27, 27, 27);
@@ -91,7 +91,7 @@
   display: inline-block;
   font-size: 15px;
   border-radius: 10px;
-  margin-left: 165px;
+  margin-left: 182px;
   margin-top: 30px;
   cursor: pointer;
 }

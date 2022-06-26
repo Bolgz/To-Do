@@ -77,10 +77,13 @@ function Login(props) {
             onChange={(e) => setPassword(e.target.value)}
             className="password-input"
           ></input>
-          <button onClick={setAuthPersistence}>Login Up</button>
+          <button onClick={setAuthPersistence} className="login_button">
+            Log in
+          </button>
+          <button onClick={toggleLoginSignup} className="signup_button">
+            Click here to Sign Up!
+          </button>
         </div>
-
-        <button onClick={toggleLoginSignup}>Sign Up</button>
 
         <div className="footer">
           <a href="https://github.com/Bolgz">
