@@ -1,3 +1,5 @@
+import UseAnimations from "react-useanimations";
+import github from "react-useanimations/lib/github";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -6,6 +8,7 @@ import {
 } from "firebase/auth";
 import React, { useState } from "react";
 import Signup from "./Signup";
+import "./Login.css";
 
 function Login(props) {
   //State for email and password
@@ -51,26 +54,48 @@ function Login(props) {
 
   if (isLogin) {
     return (
-      <div>
-        <h1>Login</h1>
-        <b>Email</b>
-        <input
-          type="text"
-          placeholder="Enter Email"
-          name="email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <b>Password</b>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <button onClick={setAuthPersistence}>Login Up</button>
+      <div className="main-content">
+        <h1 className="title-text">Welcome Back!</h1>
+
+        <div className="form-container">
+          <p className="login-text">Log in!</p>
+          <p className="email-label">Email</p>
+          <input
+            type="text"
+            placeholder="Enter Email"
+            name="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            className="email-input"
+          ></input>
+          <p className="password-label">Password</p>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            className="password-input"
+          ></input>
+          <button onClick={setAuthPersistence}>Login Up</button>
+        </div>
+
         <button onClick={toggleLoginSignup}>Sign Up</button>
+
+        <div className="footer">
+          <a href="https://github.com/Bolgz">
+            <p className="copyrighttext">Marco Freemantle</p>
+            <UseAnimations
+              animation={github}
+              size={40}
+              className="github_icon"
+              fillColor="White"
+              strokeColor="White"
+              autoplay={true}
+              loop={true}
+            />
+          </a>
+        </div>
       </div>
     );
   } else {

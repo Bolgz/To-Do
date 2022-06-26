@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import * as utilities from "./Components/Utilities/FireStoreUtilities";
 import React, { useState } from "react";
+import ParticlesBg from "particles-bg";
 
 //Firebase configuration
 const firebaseConfig = {
@@ -18,6 +19,7 @@ const firebaseConfig = {
 };
 
 //Initialize Firebase
+// eslint-disable-next-line
 const app = initializeApp(firebaseConfig);
 
 function App() {
@@ -58,7 +60,12 @@ function App() {
   getIsLoggedIn();
 
   if (isLoggedIn) {
-    return <Home handleLogout={setAuthentication} />;
+    return (
+      <div>
+        <Home handleLogout={setAuthentication} />{" "}
+        <ParticlesBg type="cobweb" bg={true} color="0000ff" />
+      </div>
+    );
   } else {
     return <Login handleLogin={setAuthentication} />;
   }

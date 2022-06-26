@@ -25,12 +25,14 @@ export async function addUser(userId) {
   });
 }
 
+//Sets user's todo list in Firestore
 export async function setTodos(userId, todoList) {
   const userRef = doc(getFirestore(), "users", userId);
 
   await updateDoc(userRef, { todos: todoList });
 }
 
+//Get user's todo list from Firestore
 export async function getTodos(userId) {
   const userRef = doc(getFirestore(), "users", userId);
   const docSnap = await getDoc(userRef);

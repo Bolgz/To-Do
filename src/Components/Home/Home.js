@@ -8,10 +8,9 @@ import "react-awesome-button/dist/styles.css";
 import UseAnimations from "react-useanimations";
 import github from "react-useanimations/lib/github";
 import * as utilities from "../Utilities/FireStoreUtilities";
-import { getUA } from "@firebase/util";
 
 function Home(props) {
-  //Test data, maybe use Firebase to store todos?
+  //State for todo list
   const [todos, setTodosState] = useState([]);
 
   //Currently selected date
