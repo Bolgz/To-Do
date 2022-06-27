@@ -9,6 +9,9 @@ function Singup(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  //State for if an signup error occurs
+  const [signupError, setSignupError] = useState("");
+
   //Handles account creation
   function createUserAccount() {
     const auth = getAuth();
@@ -20,8 +23,27 @@ function Singup(props) {
       })
       .catch((error) => {
         const errorMessage = error.message;
+        setSignupError(errorMessage);
         console.log(errorMessage);
       });
+  }
+
+  //Gets the appropriate error message for the signup error
+  function getSignupErrorMessage() {
+    if (signupError === "Firebase: Error (auth/email-already-in-use).") {
+      return <p className="error-message-signup">Email already in use</p>;
+    } else if (signupError === "Firebase: Error (auth/invalid-email).") {
+      return <p className="error-message-signup">Invalid email</p>;
+    } else if (
+      signupError ===
+      "Firebase: Password should be at least 6 characters (auth/weak-password)."
+    ) {
+      return <p className="error-message-signup">Password is too weak</p>;
+    } else if (signupError === "Firebase: Error (auth/missing-password).") {
+      return <p className="error-message-signup">Password is missing</p>;
+    } else if (signupError === "Firebase: Error (auth/missing-email).") {
+      return <p className="error-message-signup">Email is missing</p>;
+    }
   }
 
   return (
@@ -48,6 +70,7 @@ function Singup(props) {
           onChange={(e) => setPassword(e.target.value)}
           className="password-input"
         ></input>
+        <p className="error-message-signup">{getSignupErrorMessage()}</p>
         <button onClick={createUserAccount} className="signup">
           Sign up!
         </button>

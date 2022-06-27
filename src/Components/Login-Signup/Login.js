@@ -18,6 +18,9 @@ function Login(props) {
   //State for if user wants to login or signup
   const [isLogin, setIsLogin] = useState(true);
 
+  //State for if an login error occurs
+  const [loginError, setLoginError] = useState(false);
+
   //Logs in users and sets their authentication persistence
   function setAuthPersistence() {
     const auth = getAuth();
@@ -38,6 +41,7 @@ function Login(props) {
           .catch((error) => {
             const errorMessage = error.message;
             console.log(errorMessage);
+            setLoginError(true);
           });
       })
       .catch((error) => {
@@ -77,6 +81,9 @@ function Login(props) {
             onChange={(e) => setPassword(e.target.value)}
             className="password-input"
           ></input>
+          <p className="error-message-login">
+            {loginError ? "Incorrect email or password" : ""}
+          </p>
           <button onClick={setAuthPersistence} className="login_button">
             Log in
           </button>
