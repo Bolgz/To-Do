@@ -36,7 +36,6 @@ function Login(props) {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            props.handleLogin();
           })
           .catch((error) => {
             const errorMessage = error.message;

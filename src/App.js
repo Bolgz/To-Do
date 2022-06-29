@@ -4,7 +4,7 @@ import Login from "./Components/Login-Signup/Login";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import * as utilities from "./Components/Utilities/FireStoreUtilities";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ParticlesBg from "particles-bg";
 
 //Firebase configuration
@@ -25,8 +25,9 @@ const app = initializeApp(firebaseConfig);
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  //Checks if current user is logged in
-  async function getIsLoggedIn() {
+  //Using useEffect to check if the user is logged in stops inifite loop
+  useEffect(() => {
+    //Checks if current user is logged in
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
       //User is logged in
@@ -50,24 +51,16 @@ function App() {
         setIsLoggedIn(false);
       }
     });
-  }
-
-  //Sets authentication status for current user
-  function setAuthentication() {
-    setIsLoggedIn(getIsLoggedIn());
-  }
-
-  getIsLoggedIn();
+  }, []);
 
   if (isLoggedIn) {
     return (
       <div>
-        <Home handleLogout={setAuthentication} />{" "}
-        <ParticlesBg type="cobweb" bg={true} color="0000ff" />
+        <Home /> <ParticlesBg type="cobweb" bg={true} color="0000ff" />
       </div>
     );
   } else {
-    return <Login handleLogin={setAuthentication} />;
+    return <Login />;
   }
 }
 

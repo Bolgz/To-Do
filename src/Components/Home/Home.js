@@ -100,7 +100,6 @@ function Home(props) {
     signOut(auth)
       .then(() => {
         console.log("Signout successful");
-        props.handleLogout();
       })
       .catch((error) => {
         console.log(error);
